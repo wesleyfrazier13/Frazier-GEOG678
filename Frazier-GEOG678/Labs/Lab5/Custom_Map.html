@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wesley's First Web Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+    <style>
+      #map {
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    <script>
+       var map = L.map('map').fitWorld();
+
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '© OpenStreetMap'
+      }).addTo(map);
+      
+      map.locate({setView: true, maxZoom: 16});
+
+     var KyleField = L.circle([30.609827, -96.340334], {
+        color: 'maroon',
+        fillColor: '#800000',
+        fillOpacity: 0.5,
+        radius: 100
+      }).addTo(map);
+      KyleField.bindPopup("<b>Kyle Field</b><br>A football stadium in College Station");
+
+     var OandM = L.icon({
+        iconUrl: 'https://cdn4.iconfinder.com/data/icons/maps-and-navigation-solid-icons-vol-1/72/22-512.png',
+        iconSize:     [50, 50],
+        iconAnchor:   [0, 0],
+        popupAnchor:  [-3, -76]
+      });
+      L.marker([30.617620, -96.336560], {icon: OandM}).addTo(map).bindPopup("O&M Building");
+
+      var Academic = L.icon({
+        iconUrl: 'https://cdn4.iconfinder.com/data/icons/maps-and-navigation-solid-icons-vol-1/72/22-512.png',
+        iconSize:     [50, 50],
+        iconAnchor:   [0, 0],
+        popupAnchor:  [-3, -76]
+      });
+      L.marker([30.618804, -96.337628], {icon: Academic}).addTo(map).bindPopup("Academic Building");
+
+      map.on('click', function(e) {
+        L.popup()
+          .setLatLng(e.latlng)
+          .setContent("Coordinates: " + e.latlng.toString())
+          .openOn(map);
+      });
+    </script>
+  </body>
+</html>
