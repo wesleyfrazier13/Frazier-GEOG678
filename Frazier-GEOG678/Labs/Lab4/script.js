@@ -14,23 +14,25 @@ function Run()
   data.forEach(point => {
     if (point.lat > maxLat) {
       maxLat = point.lat;
-      topRightPoint = { pointId: point.pointId, latitude: point.lat, longitude: point.lon };
     }
     if (point.lon > maxLon) {
       maxLon = point.lon;
-      topRightPoint = { pointId: point.pointId, latitude: point.lat, longitude: point.lon };
-      bottomRightPoint = { pointId: point.pointId, latitude: point.lat, longitude: point.lon };
     }
     if (point.lat < minLat) {
       minLat = point.lat;
-      bottomLeftPoint = { pointId: point.pointId, latitude: point.lat, longitude: point.lon };
-      topLeftPoint = { pointId: point.pointId, latitude: point.lat, longitude: point.lon };
     }
     if (point.lon < minLon) {
       minLon = point.lon;
-      bottomLeftPoint = { pointId: point.pointId, latitude: point.lat, longitude: point.lon };
     }
+
+      topRightPoint = { pointId: point.pointId, latitude: maxLat, longitude: maxLon };
+      topLeftPoint = { pointId: point.pointId, latitude: maxLat, longitude: minLon };
+      bottomLeftPoint = { pointId: point.pointId, latitude: minLat, longitude: minLon };
+      bottomRightPoint = { pointId: point.pointId, latitude: minLat, longitude: maxLon };
   });
+
+
+
  
 var boundingBox = 
 {
